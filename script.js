@@ -86,11 +86,6 @@ Object.keys(materias).forEach(materia => {
 
 const estadoMaterias = {};
 
-const datosGuardados = localStorage.getItem("estadoMaterias");
-if (datosGuardados) {
-  Object.assign(estadoMaterias, JSON.parse(datosGuardados));
-}
-
 function crearGrilla() {
   const contenedor = document.getElementById("contenedor-cuatrimestres");
   contenedor.innerHTML = "";
@@ -108,9 +103,7 @@ function crearGrilla() {
     div.textContent = nombre;
     div.id = nombre;
     div.onclick = () => toggleMateria(nombre);
-    if (!estadoMaterias[nombre]) {
-      estadoMaterias[nombre] = "bloqueada";
-    }
+    estadoMaterias[nombre] = "bloqueada";
     const cuatri = cuatrimestreDe[nombre];
     const grid = document.getElementById(`grid-cuatri-${cuatri}`);
     if (grid) grid.appendChild(div);
@@ -131,9 +124,6 @@ function actualizarEstados() {
     div.className = "materia " + estadoMaterias[nombre];
     div.style.textDecoration = estadoMaterias[nombre] === "aprobada" ? "line-through" : "none";
   }
-}
-
- localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
 }
 
 function toggleMateria(nombre) {
