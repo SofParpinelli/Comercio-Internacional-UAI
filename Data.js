@@ -1,4 +1,0 @@
-const materias = {
-  nodes: [...],
-  links: [...]
-}
