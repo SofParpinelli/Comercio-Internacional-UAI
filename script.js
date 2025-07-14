@@ -110,6 +110,7 @@ function crearGrilla() {
   });
 
   actualizarEstados();
+    localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
 }
 
 function actualizarEstados() {
@@ -135,8 +136,13 @@ function toggleMateria(nombre) {
 function resetMaterias() {
   for (const nombre in estadoMaterias) {
     estadoMaterias[nombre] = "bloqueada";
+    localStorage.removeItem("estadoMaterias");
   }
   actualizarEstados();
+}
+const datosGuardados = localStorage.getItem("estadoMaterias");
+if (datosGuardados) {
+  Object.assign(estadoMaterias, JSON.parse(datosGuardados));
 }
 
 crearGrilla();
